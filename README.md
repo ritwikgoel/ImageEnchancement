@@ -12,8 +12,6 @@
 
 [contrast enhancement-multiple(Adaptive)](https://in.mathworks.com/help/images/contrast-enhancement-techniques.html)
 
-[darkface](https://github.com/Ir1d/DARKFACE_eval_tools/blob/master/README.md)
-
 
 [Low light image enhancement](https://in.mathworks.com/help/images/low-light-image-enhancement.html)
 
