@@ -1,0 +1,5 @@
+to use :
+
+lena = imread('c:\matlab\lena_gray_256.tif');
+M = uint8(SMQT(double(lena),1,8));
+imshow(M);
