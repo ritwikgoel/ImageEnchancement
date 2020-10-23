@@ -20,3 +20,13 @@
 function and own function, and V transform. ](http://bth.diva-portal.org/smash/get/diva2:817007/FULLTEXT01.pdf)
 
 [SMQT CODE](https://stackoverflow.com/questions/24385880/smqt-matlab-code-the-successive-mean-quantization-transform)
+
+
+Todo:
+
+
+Main running script
+
+weiner filter 
+
+quality metrics 
