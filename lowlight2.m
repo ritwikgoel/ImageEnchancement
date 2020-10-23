@@ -16,4 +16,5 @@ B = imcomplement(BInv);
 
 %Display the original image and the enhanced images, side-by-side.
 
-figure, montage({A, B});
+%figure, montage({A, B});
+imshow(B);
