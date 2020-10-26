@@ -16,3 +16,5 @@ for k = 1:6
   montage({imageData, M,lowlight,weiner,morph})
   pause(2);
 end
+
+
