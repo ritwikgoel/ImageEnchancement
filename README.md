@@ -27,6 +27,4 @@ Todo:
 
 Main running script
 
-weiner filter 
-
 quality metrics 
