@@ -1,6 +1,7 @@
 counterSMQT=0;
 counterlowlight=0;
 counterweiner=0;
+countermorph=0
 for k = 1:6
   jpgFilename = sprintf('%d.jpeg', k);
   fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
@@ -20,17 +21,19 @@ for k = 1:6
   %immse needs a grey image 
   if (immse(rgb2gray(M),imageDatagray)>immse(rgb2gray(lowlight),imageDatagray)) && (immse(rgb2gray(M),imageDatagray)>immse((weiner),imageDatagray))
       counterSMQT=counterSMQT+1;
-  elseif(immse(rgb2gray(lowlight),imageDatagray)>immse(rgb2gray(M),imageDatagray)) && (immse(rgb2gray(lowlight),imageDatagray)>immse((weiner),imageDatagray))   
+  if(immse(rgb2gray(lowlight),imageDatagray)>immse(rgb2gray(M),imageDatagray)) && (immse(rgb2gray(lowlight),imageDatagray)>immse((weiner),imageDatagray))   
       counterlowlight=counterlowlight+1;
-  elseif(immse((weiner),imageDatagray)>immse(rgb2gray(M),imageDatagray)) && (immse((weiner),imageDatagray)>immse((rgb2gray(lowlight)),imageDatagray)) 
+  if(immse((weiner),imageDatagray)>immse(rgb2gray(M),imageDatagray)) && (immse((weiner),imageDatagray)>immse((weiner),imageDatagray)) 
       counterweiner=counterweiner+1;
-  end 
+  end
+  
+  
   montage({imageData, M,lowlight,weiner,morph})
-  pause(1);
+  pause(2);
 end
 
-fprintf('Counter for SMQT (immse): %d \n',counterSMQT);
-fprintf('Counter for lowlight(immse): %d \n',counterlowlight);
-fprintf('Counter for weiner filter(immse): %d \n',counterweiner);
+fprintf('Counter for SMQT: %d \n',counterSMQT);
+fprintf('Counter for lowlight: %d \n',counterlowlight);
+fprintf('Counter for weiner filter: %d \n',counterlowlight);
 
 
