@@ -58,7 +58,7 @@ for k = 1:6
 
   montage({imageData, M,lowlight,weiner,morph})
   title('From L-R original, SMQT,lowlight,weiner');
-  pause(0.1);
+  pause(2);
 end
 
 fprintf('Counter for SMQT (immse): %d \n',imcounterSMQT);
@@ -74,43 +74,6 @@ fprintf('Counter for weiner filter(brisque): %d \n',bricounterweiner);
 
 
 
-for k = 1:6
-  jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
-  if exist(fullFileName, 'file')
-    imageData = imread(fullFileName );
-    imageDatagray=rgb2gray(imageData);
-  else
-    warningMessage = sprintf('Warning: image file does not exist:\n%s', fullFileName);
-    uiwait(warndlg(warningMessage));
-  end
-%   M = uint8(SMQT(double(imageData),1,8));
-%   lowlight=lowlight2(M);
-%   figure; imshow(lowlight);
-    if (imcounterSMQT<= imcounterweiner) && (imcounterSMQT<=imcounterlowlight)
-        %SMQT lowest
-        weiner=weinerFinal(imageData);
-        lowlight=lowlight2(weiner);
-        montage({imageData,lowlight})
-        title('From L-R original, SMQT,lowlight,weiner');
-       
-    elseif (imcounterSMQT>= imcounterweiner) && (imcounterweiner<=imcounterlowlight)
-        %weiner lowest lowlight and weiner 
-        M = uint8(SMQT(double(imageData),1,8));
-        lowlight=lowlight2(M);
-        montage({imageData,lowlight})
-        
-    elseif (imcounterlowlight<=imcounterweiner) && (imcounterSMQT>=imcounterlowlight)
-        %lowlight lowest smqt and weiner 
-        M = uint8(SMQT(double(imageData),1,8));
-        weiner=weinerFinal(M);
-        montage({imageData,weiner})
-        
-    end
-    %montage({imageData,finalimage}) 
-    pause(1);
-        
-end
 
 
 for k = 1:6
@@ -131,23 +94,106 @@ for k = 1:6
         weiner=weinerFinal(imageData);
         lowlight=lowlight2(weiner);
         montage({imageData,lowlight})
+        title('Hybrid of best 2 algorithm with respect to PSNR')
        
     elseif (psnrcounterSMQT>= psnrcounterweiner) && (psnrcounterweiner<=psnrcounterlowlight)
         %weiner lowest lowlight and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         lowlight=lowlight2(M);
         montage({imageData,lowlight})
+        title('Hybrid of best 2 algorithm with respect to PSNR')
         
     elseif (psnrcounterlowlight<=psnrcounterweiner) && (psnrcounterSMQT>=psnrcounterlowlight)
         %lowlight lowest smqt and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         weiner=weinerFinal(M);
         montage({imageData,weiner})
+        title('Hybrid of best 2 algorithm with respect to PSNR')
+    end
+    %montage({imageData,finalimage}) 
+    pause(1);
+        
+end
+
+for k = 1:6
+  jpgFilename = sprintf('%d.jpeg', k);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  if exist(fullFileName, 'file')
+    imageData = imread(fullFileName );
+    imageDatagray=rgb2gray(imageData);
+  else
+    warningMessage = sprintf('Warning: image file does not exist:\n%s', fullFileName);
+    uiwait(warndlg(warningMessage));
+  end
+%   M = uint8(SMQT(double(imageData),1,8));
+%   lowlight=lowlight2(M);
+%   figure; imshow(lowlight);
+    if (bricounterSMQT<= bricounterweiner) && (bricounterSMQT<=bricounterlowlight)
+        %SMQT lowest
+        weiner=weinerFinal(imageData);
+        lowlight=lowlight2(weiner);
+        montage({imageData,lowlight})
+        title(''Hybrid of best 2 algorithm with respect to Brisk ')
+       
+    elseif (bricounterSMQT>= bricounterweiner) && (bricounterweiner<=bricounterlowlight)
+        %weiner lowest lowlight and weiner 
+        M = uint8(SMQT(double(imageData),1,8));
+        lowlight=lowlight2(M);
+        montage({imageData,lowlight})
+        title('brisk')
+        
+    elseif (bricounterlowlight<=bricounterweiner) && (bricounterSMQT>=bricounterlowlight)
+        %lowlight lowest smqt and weiner 
+        M = uint8(SMQT(double(imageData),1,8));
+        weiner=weinerFinal(M);
+        montage({imageData,weiner})
+        title('brisk')
+    end
+    %montage({imageData,finalimage}) 
+    pause(1);
+        
+end
+
+
+for k = 1:6
+  jpgFilename = sprintf('%d.jpeg', k);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  if exist(fullFileName, 'file')
+    imageData = imread(fullFileName );
+    imageDatagray=rgb2gray(imageData);
+  else
+    warningMessage = sprintf('Warning: image file does not exist:\n%s', fullFileName);
+    uiwait(warndlg(warningMessage));
+  end
+%   M = uint8(SMQT(double(imageData),1,8));
+%   lowlight=lowlight2(M);
+%   figure; imshow(lowlight);
+    if (imcounterSMQT<= imcounterweiner) && (imcounterSMQT<=imcounterlowlight)
+        %SMQT lowest
+        weiner=weinerFinal(imageData);
+        lowlight=lowlight2(weiner);
+        montage({imageData,lowlight})
+        title('Immse');
+       
+    elseif (imcounterSMQT>= imcounterweiner) && (imcounterweiner<=imcounterlowlight)
+        %weiner lowest lowlight and weiner 
+        M = uint8(SMQT(double(imageData),1,8));
+        lowlight=lowlight2(M);
+        montage({imageData,lowlight})
+        title('Immse')
+        
+    elseif (imcounterlowlight<=imcounterweiner) && (imcounterSMQT>=imcounterlowlight)
+        %lowlight lowest smqt and weiner 
+        M = uint8(SMQT(double(imageData),1,8));
+        weiner=weinerFinal(M);
+        montage({imageData,weiner})
+        title('Immse')
         
     end
     %montage({imageData,finalimage}) 
     pause(1);
         
 end
+
 
 
