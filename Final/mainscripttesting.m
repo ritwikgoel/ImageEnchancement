@@ -6,13 +6,13 @@ psnrcounterlowlight=0;
 psnrcounterweiner=0;
 bricounterSMQT=0;
 bricounterlowlight=0;
-
 bricounterweiner=0;
-for k = 1:6
+imagerunner=12;
+for k = 1:imagerunner
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/police', jpgFilename);
   if exist(fullFileName, 'file')
-    imageData = imread(fullFileName );
+    imageData = imread(fullFileName);
     imageDatagray=rgb2gray(imageData);
   else
     warningMessage = sprintf('Warning: image file does not exist:\n%s', fullFileName);
@@ -20,7 +20,7 @@ for k = 1:6
   end
   M = uint8(SMQT(double(imageData),1,8));
   lowlight=lowlight2(imageData);
-  weiner=weinerFinal(imageData);
+  weiner=weinerFinal(imageData);    
   morph=morphological(imageDatagray);
   
   %add quality metrics here
@@ -58,7 +58,7 @@ for k = 1:6
 
   montage({imageData, M,lowlight,weiner,morph})
   title('From L-R original, SMQT,lowlight,weiner');
-  pause(2);
+  pause(0.5);
 end
 
 fprintf('Counter for SMQT (immse): %d \n',imcounterSMQT);
@@ -74,9 +74,9 @@ fprintf('Counter for weiner filter(brisque): %d \n',bricounterweiner);
 
 
 
-for k = 1:6
+for k = 1:imagerunner
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/police', jpgFilename);
   if exist(fullFileName, 'file')
     imageData = imread(fullFileName );
     imageDatagray=rgb2gray(imageData);
@@ -113,9 +113,9 @@ for k = 1:6
         
 end
 
-for k = 1:6
+for k = 1:imagerunner
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/police', jpgFilename);
   if exist(fullFileName, 'file')
     imageData = imread(fullFileName );
     imageDatagray=rgb2gray(imageData);
@@ -131,21 +131,21 @@ for k = 1:6
         weiner=weinerFinal(imageData);
         lowlight=lowlight2(weiner);
         montage({imageData,lowlight})
-        title('Hybrid of best 2 algorithm with respect to Brisk (weiner->lowlight)')
+        title('Hybrid of best 2 algorithm with respect to Brisque (weiner->lowlight)')
        
     elseif (bricounterSMQT>= bricounterweiner) && (bricounterweiner<=bricounterlowlight)
         %weiner lowest lowlight and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         lowlight=lowlight2(M);
         montage({imageData,lowlight})
-        title('Hybrid of best 2 algorithm with respect to Brisk (SMQT->lowlight)')
+        title('Hybrid of best 2 algorithm with respect to Brisque (SMQT->lowlight)')
         
     elseif (bricounterlowlight<=bricounterweiner) && (bricounterSMQT>=bricounterlowlight)
         %lowlight lowest smqt and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         weiner=weinerFinal(M);
         montage({imageData,weiner})
-        title('Hybrid of best 2 algorithm with respect to Brisk (SMQT->weiner)')
+        title('Hybrid of best 2 algorithm with respect to Brisque (SMQT->weiner)')
     end
     %montage({imageData,finalimage}) 
     pause(1);
@@ -153,9 +153,9 @@ for k = 1:6
 end
 
 
-for k = 1:6
+for k = 1:imagerunner
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/police', jpgFilename);
   if exist(fullFileName, 'file')
     imageData = imread(fullFileName );
     imageDatagray=rgb2gray(imageData);

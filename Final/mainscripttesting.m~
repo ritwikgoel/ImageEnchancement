@@ -8,9 +8,9 @@ bricounterSMQT=0;
 bricounterlowlight=0;
 
 bricounterweiner=0;
-for k = 1:6
+for k = 1:30
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/robbery', jpgFilename);
   if exist(fullFileName, 'file')
     imageData = imread(fullFileName );
     imageDatagray=rgb2gray(imageData);
@@ -58,7 +58,7 @@ for k = 1:6
 
   montage({imageData, M,lowlight,weiner,morph})
   title('From L-R original, SMQT,lowlight,weiner');
-  pause(2);
+  pause(0.5);
 end
 
 fprintf('Counter for SMQT (immse): %d \n',imcounterSMQT);
@@ -74,11 +74,9 @@ fprintf('Counter for weiner filter(brisque): %d \n',bricounterweiner);
 
 
 
-
-
-for k = 1:6
+for k = 1:30
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/robbery', jpgFilename);
   if exist(fullFileName, 'file')
     imageData = imread(fullFileName );
     imageDatagray=rgb2gray(imageData);
@@ -94,30 +92,30 @@ for k = 1:6
         weiner=weinerFinal(imageData);
         lowlight=lowlight2(weiner);
         montage({imageData,lowlight})
-        title('Hybrid of best 2 algorithm with respect to PSNR')
+        title('Hybrid of best 2 algorithm with respect to PSNR (weiner->lowlight)')
        
     elseif (psnrcounterSMQT>= psnrcounterweiner) && (psnrcounterweiner<=psnrcounterlowlight)
         %weiner lowest lowlight and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         lowlight=lowlight2(M);
         montage({imageData,lowlight})
-        title('Hybrid of best 2 algorithm with respect to PSNR')
+        title('Hybrid of best 2 algorithm with respect to PSNR (SMQT->lowlight)')
         
     elseif (psnrcounterlowlight<=psnrcounterweiner) && (psnrcounterSMQT>=psnrcounterlowlight)
         %lowlight lowest smqt and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         weiner=weinerFinal(M);
         montage({imageData,weiner})
-        title('Hybrid of best 2 algorithm with respect to PSNR')
+        title('Hybrid of best 2 algorithm with respect to PSNR (SMQT->weiner)')
     end
     %montage({imageData,finalimage}) 
     pause(1);
         
 end
 
-for k = 1:6
+for k = 1:30
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/robbery', jpgFilename);
   if exist(fullFileName, 'file')
     imageData = imread(fullFileName );
     imageDatagray=rgb2gray(imageData);
@@ -133,21 +131,21 @@ for k = 1:6
         weiner=weinerFinal(imageData);
         lowlight=lowlight2(weiner);
         montage({imageData,lowlight})
-        title(''Hybrid of best 2 algorithm with respect to Brisk ')
+        title('Hybrid of best 2 algorithm with respect to Brisk (weiner->lowlight)')
        
     elseif (bricounterSMQT>= bricounterweiner) && (bricounterweiner<=bricounterlowlight)
         %weiner lowest lowlight and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         lowlight=lowlight2(M);
         montage({imageData,lowlight})
-        title('brisk')
+        title('Hybrid of best 2 algorithm with respect to Brisk (SMQT->lowlight)')
         
     elseif (bricounterlowlight<=bricounterweiner) && (bricounterSMQT>=bricounterlowlight)
         %lowlight lowest smqt and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         weiner=weinerFinal(M);
         montage({imageData,weiner})
-        title('brisk')
+        title('Hybrid of best 2 algorithm with respect to Brisk (SMQT->weiner)')
     end
     %montage({imageData,finalimage}) 
     pause(1);
@@ -155,9 +153,9 @@ for k = 1:6
 end
 
 
-for k = 1:6
+for k = 1:30
   jpgFilename = sprintf('%d.jpeg', k);
-  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/car', jpgFilename);
+  fullFileName = fullfile('/home/tangobeer/Desktop/ImageEnchancement/DataSet/robbery', jpgFilename);
   if exist(fullFileName, 'file')
     imageData = imread(fullFileName );
     imageDatagray=rgb2gray(imageData);
@@ -173,21 +171,21 @@ for k = 1:6
         weiner=weinerFinal(imageData);
         lowlight=lowlight2(weiner);
         montage({imageData,lowlight})
-        title('Immse');
+        title('Hybrid of best 2 algorithm with respect to IMMSE (weiner->lowlight)');
        
     elseif (imcounterSMQT>= imcounterweiner) && (imcounterweiner<=imcounterlowlight)
         %weiner lowest lowlight and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         lowlight=lowlight2(M);
         montage({imageData,lowlight})
-        title('Immse')
+        title('Hybrid of best 2 algorithm with respect to IMMSE (SMQT->lowlight)')
         
     elseif (imcounterlowlight<=imcounterweiner) && (imcounterSMQT>=imcounterlowlight)
         %lowlight lowest smqt and weiner 
         M = uint8(SMQT(double(imageData),1,8));
         weiner=weinerFinal(M);
         montage({imageData,weiner})
-        title('Immse')
+        title('Hybrid of best 2 algorithm with respect to IMMSE (SMQT->weiner)')
         
     end
     %montage({imageData,finalimage}) 
