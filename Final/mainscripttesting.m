@@ -32,8 +32,8 @@ for k = 1:imagerunner
   elseif(immse((weiner),imageDatagray)<immse(rgb2gray(M),imageDatagray)) && (immse((weiner),imageDatagray)<immse((rgb2gray(lowlight)),imageDatagray)) 
       imcounterweiner=imcounterweiner+1;
   end 
-  [smqtpeaksnr, smqtsnr] = psnr(rgb2gray(M), imageDatagray);
-  [lowlightpeaksnr, lowlightsnr] = psnr(rgb2gray(lowlight), imageDatagray);
+  [smqtpeaksnr, smqtsnr] = psnr((M), imageData);
+  [lowlightpeaksnr, lowlightsnr] = psnr((lowlight), imageData);
   [weinerpeaksnr, weinersnr] = psnr(weiner, imageDatagray);
 %   fprintf('\n The SNR value is %0.4f\n', weinersnr);
 %   fprintf('\n The Peak-SNR value is %0.4f\n', weinerpeaksnr);
